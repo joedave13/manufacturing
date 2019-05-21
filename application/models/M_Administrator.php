@@ -22,6 +22,19 @@
             $this->db->where('id != ', 1);
             return $this->db->get('user_menu')->result_array();
         }
+
+        public function getAllUser()
+        {
+            $this->db->select('*');
+            $this->db->from('user');
+            $this->db->join('user_role', 'user.role_id = user_role.id');
+            return $this->db->get()->result_array();
+        
+        }
+        public function addUser($data)
+        {
+            $this->db->insert('user', $data);
+        }
     }
     
     /* End of file M_Administrator.php */
