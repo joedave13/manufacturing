@@ -26,11 +26,12 @@
 					<tr>
 						<th scope="row"><?= $i; ?></th>
 						<td><?= $p['name']; ?></td>
-						<td><?= $p['price']; ?></td>
+						<td>Rp. <?= number_format($p['price'], 2, ',', '.'); ?></td>
 						<td><?= $p['qty']; ?></td>
 						<td><?= $p['type']; ?></td>
 						<td>
-							<a href="" class="btn btn-info btn-sm">Detail</a>
+							<a href="<?= base_url('manufacturing/detailProduct/') . $p['id_produk']; ?>"
+								class="btn btn-info btn-sm">Detail</a>
 							<a href="<?= base_url('manufacturing/editProduct/') . $p['id_produk']; ?>"
 								class="btn btn-warning btn-sm">Edit</a>
 							<a href="<?= base_url('manufacturing/deleteProduct/') . $p['id_produk']; ?>"

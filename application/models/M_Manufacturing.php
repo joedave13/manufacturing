@@ -38,6 +38,15 @@
             $this->db->where('id_produk', $id);
             $this->db->delete('produk');
         }
+
+        public function getProductDetail($id)
+        {
+            $this->db->select('*');
+            $this->db->from('produk');
+            $this->db->join('category', 'produk.category_id = category.id');
+            $this->db->where('id_produk', $id);
+            return $this->db->get()->row_array();
+        }
     }
     
     /* End of file M_Manufacturing.php */
