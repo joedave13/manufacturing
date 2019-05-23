@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2019 at 05:50 AM
+-- Generation Time: May 23, 2019 at 03:38 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -38,6 +38,24 @@ CREATE TABLE `bom` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category_name`) VALUES
+(1, 'PC Kit');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `man_order`
 --
 
@@ -55,9 +73,24 @@ CREATE TABLE `man_order` (
 --
 
 CREATE TABLE `produk` (
-  `id_produk` int(50) NOT NULL,
-  `harga` varchar(50) NOT NULL
+  `id_produk` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `price` varchar(128) NOT NULL,
+  `tax` float NOT NULL,
+  `qty` varchar(128) NOT NULL,
+  `image` varchar(128) NOT NULL,
+  `type` varchar(128) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `date_created` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id_produk`, `name`, `price`, `tax`, `qty`, `image`, `type`, `category_id`, `date_created`) VALUES
+(1, 'Dell PC', '4000000', 0.15, '200', 'default_product.jpg', 'Storable Product', 1, 0),
+(2, 'Dell Keyboard', '500000', 0.15, '5', 'default_product.jpg', 'Storable Product', 1, 1558615015);
 
 -- --------------------------------------------------------
 
@@ -80,8 +113,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `name`, `email`, `image`, `password`, `role_id`, `date_created`) VALUES
-(10, 'Joshua Davian Kristanto', 'joshuadavian@gmail.com', 'default.jpg', '$2y$10$qpy9mVbJjb2uqHkBL8D5t.lOH6YN8Dtz3Ffqo2BgXg0AnbTNrpPY2', 1, 1558246824),
-(12, 'Elaine Hartanto', 'elaine@gmail.com', 'default.jpg', '$2y$10$FKdVZ9lS2XsdvUHH13golOFy0.59g3ZWv7QQJ2Wflx7O78n.t4wpq', 2, 1558324028);
+(10, 'Joshua Davian', 'joshuadavian@gmail.com', 'LOGO_POLITEKNIK_NEGERI_MALANG.png', '$2y$10$qpy9mVbJjb2uqHkBL8D5t.lOH6YN8Dtz3Ffqo2BgXg0AnbTNrpPY2', 3, 1558246824),
+(12, 'Elaine Hartanto', 'elaine@gmail.com', 'default.jpg', '$2y$10$FKdVZ9lS2XsdvUHH13golOFy0.59g3ZWv7QQJ2Wflx7O78n.t4wpq', 2, 1558324028),
+(15, 'Fransiska Tiara Dita', 'fransiska@gmail.com', 'default.jpg', '$2y$10$lpuz9wjRHUgOOBJz3Sp/z.3qsSZQB8RQlU0aex8fUfXQkWi5q3vp6', 2, 1558503443);
 
 -- --------------------------------------------------------
 
@@ -105,7 +139,10 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (3, 2, 2),
 (4, 1, 3),
 (6, 2, 4),
-(8, 1, 4);
+(9, 1, 4),
+(10, 3, 2),
+(11, 3, 4),
+(12, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -145,7 +182,8 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Administrator'),
-(2, 'Manager');
+(2, 'Manager'),
+(3, 'Manufacture Administrator');
 
 -- --------------------------------------------------------
 
@@ -175,7 +213,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (6, 4, 'Products', 'manufacturing', 'fas fa-fw fa-shopping-bag', 1),
 (7, 1, 'Role Management', 'administrator/roleManagement', 'fas fa-fw fa-user-tie', 1),
 (8, 4, 'Bill of Material', 'manufacturing/bom', 'fas fa-fw fa-shopping-bag', 1),
-(9, 4, 'Manufacturing Order', 'manufacturing/order', 'fas fa-fw fa-shopping-bag', 1);
+(9, 4, 'Manufacturing Order', 'manufacturing/order', 'fas fa-fw fa-shopping-bag', 1),
+(10, 2, 'Edit Profile', 'manager/editProfile', 'fas fa-fw fa-user-edit', 1);
 
 --
 -- Indexes for dumped tables
@@ -186,6 +225,12 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 --
 ALTER TABLE `bom`
   ADD PRIMARY KEY (`id_bom`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `man_order`
@@ -240,6 +285,12 @@ ALTER TABLE `bom`
   MODIFY `id_bom` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `man_order`
 --
 ALTER TABLE `man_order`
@@ -249,19 +300,19 @@ ALTER TABLE `man_order`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -273,13 +324,13 @@ ALTER TABLE `user_menu`
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
