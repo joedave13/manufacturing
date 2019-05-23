@@ -28,10 +28,6 @@
 						<td><?= $lu['role']; ?></td>
 						<td><?= date('d M Y', $lu['date_created']); ?></td>
 						<td>
-							<a href="<?= base_url('administrator/detailUser/') . $lu['id_user']; ?>"
-								class="btn btn-info btn-sm">
-								Detail
-							</a>
 							<a href="<?= base_url('administrator/deleteUser/') . $lu['id_user']; ?>"
 								class="btn btn-danger btn-sm">
 								Delete

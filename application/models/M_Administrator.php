@@ -23,6 +23,11 @@
             return $this->db->get('user_menu')->result_array();
         }
 
+        public function addRoleData($data)
+        {
+            $this->db->insert('user_role', $data);
+        }
+
         public function getAllUser()
         {
             $this->db->select('*');
@@ -34,6 +39,12 @@
         public function addUser($data)
         {
             $this->db->insert('user', $data);
+        }
+
+        public function deleteUserData($id)
+        {
+            $this->db->where('id_user', $id);
+            $this->db->delete('user');
         }
     }
     

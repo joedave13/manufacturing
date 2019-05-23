@@ -11,6 +11,9 @@
         
         public function index()
         {
+            if ($this->session->userdata('email')) {
+                redirect('manager');
+            }
             $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
             
@@ -60,6 +63,9 @@
         
         public function registration()
         {
+            if ($this->session->userdata('email')) {
+                redirect('manager');
+            }
             $this->form_validation->set_rules('name', 'Full Name', 'trim|required');
             $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[user.email]');
             $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[5]|matches[password2]');

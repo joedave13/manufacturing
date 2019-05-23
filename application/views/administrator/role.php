@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-lg">
-			<?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>') ?>
+			<?= form_error('role', '<div class="alert alert-danger" role="alert">', '</div>') ?>
 			<?= $this->session->flashdata('message'); ?>
 			<a href="" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#addRoleModal">Add New
 				Role</a>
@@ -53,14 +53,13 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="<?= base_url('menu'); ?>" method="post">
+			<form action="<?= base_url('administrator/addRole'); ?>" method="post">
 				<div class="modal-body">
 					<div class="form-group">
-						<input type="text" class="form-control" id="menu" name="menu" placeholder="Menu Name">
+						<input type="text" class="form-control" id="role" name="role" placeholder="Role Name">
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Add</button>
 				</div>
 			</form>

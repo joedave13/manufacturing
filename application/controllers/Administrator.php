@@ -38,6 +38,33 @@ class Administrator extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function addRole()
+    {
+        $this->form_validation->set_rules('role', 'Role Name', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = 'Role Management';
+            $data['user'] = $this->M_Administrator->getUserData();
+
+            $data['role'] = $this->M_Administrator->getRoleData();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('administrator/role', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'role' => htmlspecialchars($this->input->post('role', true))
+            ];
+            $this->M_Administrator->addRoleData($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            New Role Added.</div>');
+            redirect('administrator/roleManagement');
+        }
+        
+    }
+
     public function roleAccess($role_id)
     {
         $data['title'] = 'Role Management';
@@ -93,7 +120,7 @@ class Administrator extends CI_Controller
         $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[user.email]');
         $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[5]|matches[password2]');
         $this->form_validation->set_rules('password2', 'Repeat Password', 'trim|required|matches[password1]');
-        
+
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Form Add User';
             $data['user'] = $this->M_Administrator->getUserData();
@@ -116,7 +143,14 @@ class Administrator extends CI_Controller
             New User Added.</div>');
             redirect('administrator/addUser');
         }
-        
+    }
+
+    public function deleteUser($id)
+    {
+        $this->M_Administrator->deleteUserData($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+        User Deleted.</div>');
+        redirect('administrator/addUser');
     }
 }
     
