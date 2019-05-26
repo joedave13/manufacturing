@@ -18,6 +18,7 @@
 						<th scope="col">Price</th>
 						<th scope="col">Qty</th>
 						<th scope="col">Type</th>
+						<th scope="col">Kind Of</th>
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
@@ -29,6 +30,7 @@
 						<td>Rp. <?= number_format($p['price'], 2, ',', '.'); ?></td>
 						<td><?= $p['qty']; ?></td>
 						<td><?= $p['type']; ?></td>
+						<td><?= $p['kind_of']; ?></td>
 						<td>
 							<a href="<?= base_url('manufacturing/detailProduct/') . $p['id_produk']; ?>"
 								class="btn btn-info btn-sm">Detail</a>

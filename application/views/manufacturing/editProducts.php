@@ -32,7 +32,7 @@
 						<?php echo form_error('qty', '<small class="text-danger">', '</small>'); ?>
 					</div>
 					<div class="form-group">
-						<label for="name">Type</label>
+						<label for="type">Type</label>
 						<select class="form-control" name="type" id="type">
 							<option value="">Select Type</option>
 							<?php foreach($type as $t) : ?>
@@ -41,6 +41,19 @@
 							<?php else : ?>
 							<option value="<?= $t; ?>"><?= $t; ?></option>
 							<?php endif;?>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="kind_of">Kind Of</label>
+						<select class="form-control" name="kind_of" id="kind_of">
+							<option value="">Select Kind Of</option>
+							<?php foreach($kind_of as $k) : ?>
+							<?php if($k == $selectedProduct['kind_of']) : ?>
+							<option value="<?= $k; ?>" selected><?= $k; ?></option>
+							<?php else : ?>
+							<option value="<?= $k; ?>"><?= $k; ?></option>
+							<?php endif; ?>
 							<?php endforeach; ?>
 						</select>
 					</div>

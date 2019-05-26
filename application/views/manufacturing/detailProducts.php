@@ -19,6 +19,7 @@
 							<p class="card-text"><b>Qty On Hands : </b><?= $product['qty']; ?></p>
 							<p class="card-text"><b>Type : </b><?= $product['type']; ?></p>
 							<p class="card-text"><b>Category : </b><?= $product['category_name']; ?></p>
+							<p class="card-text"><b>Kind Of : </b><?= $product['kind_of']; ?></p>
 							<p class="card-text"><small class="text-muted">Created
 									<?= date('d M Y', $product['date_created']); ?></small></p>
 						</div>

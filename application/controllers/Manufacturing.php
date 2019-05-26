@@ -46,6 +46,7 @@ class Manufacturing extends CI_Controller
                 'qty' => $this->input->post('qty'),
                 'image' => 'default_product.jpg',
                 'type' => $this->input->post('type'),
+                'kind_of' => $this->input->post('kind_of'),
                 'category_id' => $this->input->post('category'),
                 'date_created' => time()
             ];
@@ -68,6 +69,7 @@ class Manufacturing extends CI_Controller
             $data['category'] = $this->M_Manufacturing->getProductCategory();
             $data['selectedProduct'] = $this->M_Manufacturing->getProductById($id);
             $data['type'] = ['Storable Product', 'Consumable', 'Service'];
+            $data['kind_of'] = ['Component', 'Complete Product'];
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -79,6 +81,7 @@ class Manufacturing extends CI_Controller
                 'price' => $this->input->post('price'),
                 'qty' => $this->input->post('qty'),
                 'type' => $this->input->post('type'),
+                'kind_of' => $this->input->post('kind_of'),
                 'category_id' => $this->input->post('category'),
             ];
             $id_produk = $this->input->post('id');

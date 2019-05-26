@@ -37,12 +37,20 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="category">Category</label>
-							<?php foreach($category as $c) : ?>
-							<select class="form-control" name="category" id="category">
-								<option value="">Select Category</option>
-								<option value="<?= $c['id']; ?>"><?= $c['category_name']; ?></option>
+							<label for="kind_of">Kind Of</label>
+							<select class="form-control" name="kind_of" id="kind_of">
+								<option value="">Select Kind</option>
+								<option value="Component">Component</option>
+								<option value="Complete Product">Complete Product</option>
 							</select>
+						</div>
+						<div class="form-group">
+							<label for="category">Category</label>
+							<?php foreach ($category as $c) : ?>
+								<select class="form-control" name="category" id="category">
+									<option value="">Select Category</option>
+									<option value="<?= $c['id']; ?>"><?= $c['category_name']; ?></option>
+								</select>
 							<?php endforeach; ?>
 						</div>
 						<div class="form-group">
